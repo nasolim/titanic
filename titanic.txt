@@ -1,0 +1,45 @@
+view all columns:
+training.columns dot syntax works if column names could double for variables or dont double as a function name
+
+You can use .apply() to apply a function on each datum in a frame:
+data.date = data.date.apply(lambda d: datetime.strptime(d, "%Y-%m-%d"))
+
+assigning a new index:
+training.index = training.column_name
+
+Look up a row:
+training.ix[]
+
+drop a column
+training = training.drop([column_name], axis=1)
+
+Iterate over a row:
+for idx, row in training.iterrows():
+	if condition in row['col_name']:
+		do something
+
+Filtering
+var_name = training[training.coln_name <= condition]
+multiple filters:
+training[(statement 1) & (statement 2)]
+& stands for "and"
+| stands for "or"
+
+finding missing age values:
+index = training['Age'].index[training['Age'].apply(np.isnan)]
+
+finding usable values that surround the missing age value:
+usable = lambda age: 0 if np.isnan(a) == True else a
+
+loop to fill missing values:
+for x in index:
+	range = [usable(training['Age'][x-1]),usable(training['Age'][x+1])]
+	age = np.average(range)
+	training['Age'][x] = age
+	
+is_child filter:
+child = lambda age: 1 if age < 13 else 0
+
+
+creating is_child column and filling values:
+training['is_child'] = child(training
